@@ -1,6 +1,6 @@
 # scel2txt
 
-搜狗细胞词库转鼠须管（RIME）词库，使用 Python3 实现
+搜狗细胞词库转鼠须管（Rime）词库，使用 Python3 实现
 
 ## 使用
 

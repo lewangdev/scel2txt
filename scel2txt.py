@@ -1,5 +1,5 @@
 """
-搜狗细胞词库转鼠须管（RIME）词库
+搜狗细胞词库转鼠须管（Rime）词库
 
 @see 解析逻辑见 https://raw.githubusercontent.com/xwzhong/small-program/master/scel-to-txt/scel2txt.py
 """
@@ -136,7 +136,7 @@ class Scel2Txt(object):
 
     def deal(self, file_name):
         self.GTable = []
-        print('-'*60)
+        print('-'*80)
         with open(file_name, 'rb') as fin:
             data = fin.read()
         if data[0:12] != b"\x40\x15\x00\x00\x44\x43\x53\x01\x01\x00\x00\x00":
