@@ -52,12 +52,14 @@ def get_hz_offset(f):
     else:
         sys.exit(1)
 
+
 def get_dict_meta(f):
     title = read_utf16_str(f, 0x130, 0x338 - 0x130)
     category = read_utf16_str(f, 0x338, 0x540 - 0x338)
     desc = read_utf16_str(f, 0x540, 0xd40 - 0x540)
     samples = read_utf16_str(f, 0xd40, 0x1540 - 0xd40)
     return title, category, desc, samples
+
 
 def get_py_map(f):
     py_map = {}
@@ -74,6 +76,7 @@ def get_py_map(f):
         if py_str == 'zuo':
             break
     return py_map
+
 
 def get_records(f, file_size, hz_offset, py_map):
     f.seek(hz_offset)
