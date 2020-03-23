@@ -4,10 +4,13 @@
 
 ## 使用
 
-将从搜狗官方网站下载的 `.scel` 文件放入 `scel` 文件夹，然后运行
+将从[搜狗官方词库网站](https://pinyin.sogou.com/dict/)下载的 `*.scel` 文件放入 `scel` 文件夹，然后运行
 
 ```bash
 python3 scel2txt.py
 ```
 
-将在 `out` 文件夹得到后缀为 `.txt` 的同名词库。词库格式为一行一词。
+可以得到:
+
+* 后缀为 .txt 的同名词库
+* luna_pinyin.sogou.dict.yaml
