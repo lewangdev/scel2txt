@@ -1,5 +1,7 @@
 """
-@see https://raw.githubusercontent.com/xwzhong/small-program/master/scel-to-txt/scel2txt.py
+搜狗细胞词库转鼠须管（RIME）词库
+
+@see 解析逻辑见 https://raw.githubusercontent.com/xwzhong/small-program/master/scel-to-txt/scel2txt.py
 """
 
 import sys
