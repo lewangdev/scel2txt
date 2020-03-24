@@ -1,9 +1,7 @@
 """
 搜狗细胞词库转鼠须管（Rime）词库
 
-搜狗的 scel 词库是按照一定格式保存的 unicode 编码文件，其中每两个字节表示一个字符（中文汉字或者英文字母）
-
-主要两部分:
+搜狗的 scel 词库是按照一定格式保存的 Unicode 编码文件，其中每两个字节表示一个字符（中文汉字或者英文字母），主要两部分:
 
 1. 全局拼音表，在文件中的偏移值是 0x1540+4, 格式为 (py_idx, py_len, py_str)
     - py_idx: 两个字节的整数，代表这个拼音的索引
@@ -17,7 +15,7 @@
     - word_len:两个字节的整数，代表中文词组字节数长度
     - word_str: 汉语词组，每个中文汉字两个字节，总长度 word_len
     - ext_len: 两个字节的整数，可能代表扩展信息的长度，好像都是 10
-    - ext: 扩展信息，前两个字节是一个整数(不知道是不是词频) 后八个字节全是 0，ext_len 和 ext 一共 12 个字节
+    - ext: 扩展信息，一共 10 个字节，前两个字节是一个整数(不知道是不是词频)，后八个字节全是 0，ext_len 和 ext 一共 12 个字节
 
 参考资料 
 1. https://raw.githubusercontent.com/archerhu/scel2mmseg/master/scel2mmseg.py
@@ -46,6 +44,7 @@ def get_hz_offset(f):
     elif mask == 0x45:
         return 0x26c4
     else:
+        print("不支持的文件类型(无法获取汉语词组的偏移量)")
         sys.exit(1)
 
 
@@ -69,6 +68,7 @@ def get_py_map(f):
         if py_idx not in py_map:
             py_map[py_idx] = py_str
 
+        # 如果拼音为 zuo，说明是最后一个了
         if py_str == 'zuo':
             break
     return py_map
