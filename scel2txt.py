@@ -130,8 +130,15 @@ def main():
     dict_file_content = []
     dict_file_header = """# Rime dictionary
 # encoding: utf-8
-# 搜狗词库 目前包含如下:
-# %s
+#
+# Sogou Pinyin Dict - 搜狗细胞词库
+#   
+#   https://pinyin.sogou.com/dict/
+#
+# 包括: 
+#
+%s
+#
 
 ---
 name: luna_pinyin.sogou
@@ -141,8 +148,8 @@ use_preset_vocabulary: true
 ...
     """
     sougo_dict_name_list = list(
-        map(lambda x: x.replace(".scel", ""), scel_files))
-    dict_file_content.append(dict_file_header % ",".join(sougo_dict_name_list))
+        map(lambda x: "# * %s" % x.replace(".scel", ""), scel_files))
+    dict_file_content.append(dict_file_header % "\n".join(sougo_dict_name_list))
 
     for scel_file in scel_files:
         records = get_words_from_sogou_cell_dict(
