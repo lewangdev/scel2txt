@@ -4,7 +4,7 @@
 
 ## 使用
 
-将从[搜狗官方词库网站](https,//pinyin.sogou.com/dict/)下载的 `*.scel` 文件放入 `scel` 文件夹，然后运行
+将从[搜狗官方词库网站](https://pinyin.sogou.com/dict/)下载的 `*.scel` 文件放入 `scel` 文件夹，然后运行
 
 ```shell
 python3 scel2txt.py
@@ -13,12 +13,14 @@ python3 scel2txt.py
 ## 生成的文件
 
 * 后缀为 .txt 的同名词库文件
-* 自动合并所有 *.txt 文件到 luna_pinyin.sogou.dict.yaml
+* 自动合并所有 *.txt 文件到 `luna_pinyin.sogou.dict.yaml`
 
 
 ## 搜狗细胞词库（scel格式文件） 格式说明
 
-按照一定格式保存的 Unicode 编码文件，其中每两个字节表示一个字符（中文汉字或者英文字母），主要包括两部分:
+按照一定格式保存的 Unicode 编码文件，其中每两个字节表示一个字符（中文汉字或者英文字母）。  
+
+主要包括两部分: 
 
 1. 全局拼音表，在文件中的偏移值是 0x1540+4, 格式为 (py_idx, py_len, py_str)
     - py_idx: 两个字节的整数，代表这个拼音的索引
@@ -37,21 +39,21 @@ python3 scel2txt.py
 
 ## 目前已测试的词库
 
-* 搜狗标准词库.scel, 392777 个词
-* 网络流行新词【官方推荐】.scel, 24923 个词
-* 最详细的全国地名大全.scel, 114572 个词
-* 开发大神专用词库【官方推荐】.scel, 430 个词
-* 中国高等院校（大学）大全【官方推荐】.scel, 7192 个词
-* 宋词精选【官方推荐】.scel, 7297 个词
-* 成语俗语【官方推荐】.scel, 46785 个词
-* linux少量术语.scel, 136 个词
-* 计算机词汇大全【官方推荐】.scel, 10300 个词
-* 论语大全【官方推荐】.scel, 2907 个词
-* 歇后语集锦【官方推荐】.scel, 1926 个词
-* 数学词汇大全【官方推荐】.scel, 15992 个词
-* 物理词汇大全【官方推荐】.scel, 13107 个词
-* 中国历史词汇大全【官方推荐】.scel, 20526 个词
-* 饮食大全【官方推荐】.scel, 6918 个词
+* [搜狗标准词库](https://pinyin.sogou.com/dict/detail/index/11640), 392777 个词
+* [网络流行新词【官方推荐】](https://pinyin.sogou.com/dict/detail/index/4), 24923 个词
+* [最详细的全国地名大全](https://pinyin.sogou.com/dict/detail/index/1316), 114572 个词
+* [开发大神专用词库【官方推荐】](https://pinyin.sogou.com/dict/detail/index/75228), 430 个词
+* [中国高等院校（大学）大全【官方推荐】](https://pinyin.sogou.com/dict/detail/index/20647), 7192 个词
+* [宋词精选【官方推荐】](https://pinyin.sogou.com/dict/detail/index/3), 7297 个词
+* [成语俗语【官方推荐】](https://pinyin.sogou.com/dict/detail/index/15097), 46785 个词
+* [linux少量术语](https://pinyin.sogou.com/dict/detail/index/225), 136 个词
+* [计算机词汇大全【官方推荐】](https://pinyin.sogou.com/dict/detail/index/15117), 10300 个词
+* [论语大全【官方推荐】](https://pinyin.sogou.com/dict/detail/index/22406), 2907 个词
+* [歇后语集锦【官方推荐】](https://pinyin.sogou.com/dict/detail/index/22418), 1926 个词
+* [数学词汇大全【官方推荐】](https://pinyin.sogou.com/dict/detail/index/15202), 15992 个词
+* [物理词汇大全【官方推荐】](https://pinyin.sogou.com/dict/detail/index/15203), 13107 个词
+* [中国历史词汇大全【官方推荐】](https://pinyin.sogou.com/dict/detail/index/15130), 20526 个词
+* [饮食大全【官方推荐】](https://pinyin.sogou.com/dict/detail/index/15201), 6918 个词
 
 ## 参考资料
 
