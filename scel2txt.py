@@ -1,29 +1,25 @@
 """
 搜狗细胞词库转鼠须管（Rime）词库
 
-搜狗的scel词库就是保存的文本的 unicode 编码，每两个字节一个字符（中文汉字或者英文字母）
-找出其每部分的偏移位置即可
-主要两部分
-1.全局拼音表，貌似是所有的拼音组合，字典序
-      格式为 (idx,len,pinyin) 的列表
-      idx: 两个字节的整数 代表这个拼音的索引
-      len: 两个字节的整数 拼音的字节长度
-      pinyin: 当前的拼音，每个字符两个字节，总长 len
+搜狗的 scel 词库是按照一定格式保存的 unicode 编码文件，其中每两个字节表示一个字符（中文汉字或者英文字母）
 
-2.汉语词组表
-      格式为 (same,py_table_len,py_table,{word_len,word,ext_len,ext}) 的一个列表
-      same: 两个字节 整数 同音词数量
-      py_table_len:  两个字节 整数
-      py_table: 整数列表，每个整数两个字节,每个整数代表一个拼音的索引
+主要两部分:
 
-      word_len:两个字节 整数 代表中文词组字节数长度
-      word: 中文词组,每个中文汉字两个字节，总长度 word_len
-      ext_len: 两个字节 整数 代表扩展信息的长度，好像都是 10
-      ext: 扩展信息 前两个字节是一个整数(不知道是不是词频) 后八个字节全是 0
+1. 全局拼音表，在文件中的偏移值是 0x1540+4, 格式为 (py_idx, py_len, py_str)
+    - py_idx: 两个字节的整数，代表这个拼音的索引
+    - py_len: 两个字节的整数，拼音的字节长度
+    - py_str: 当前的拼音，每个字符两个字节，总长 py_len
 
-     {word_len,word,ext_len,ext} 一共重复 same 次 同音词 相同拼音表
+2. 汉语词组表，在文件中的偏移值是 0x2628 或 0x26c4, 格式为 (word_count, py_idx_count, py_idx_data, (word_len, word_str, ext_len, ext){word_count})，其中 (word_len, word, ext_len, ext){word_count} 一共重复 word_count 次, 表示拼音的相同的词一共有 word_count 个
+    - word_count: 两个字节的整数，同音词数量
+    - py_idx_count:  两个字节的整数，拼音的索引个数
+    - py_idx_data: 两个字节表示一个整数，每个整数代表一个拼音的索引，拼音索引数 
+    - word_len:两个字节的整数，代表中文词组字节数长度
+    - word_str: 汉语词组，每个中文汉字两个字节，总长度 word_len
+    - ext_len: 两个字节的整数，可能代表扩展信息的长度，好像都是 10
+    - ext: 扩展信息，前两个字节是一个整数(不知道是不是词频) 后八个字节全是 0，ext_len 和 ext 一共 12 个字节
 
-参考资料
+参考资料 
 1. https://raw.githubusercontent.com/archerhu/scel2mmseg/master/scel2mmseg.py
 2. https://raw.githubusercontent.com/xwzhong/small-program/master/scel-to-txt/scel2txt.py
 """
@@ -83,19 +79,21 @@ def get_records(f, file_size, hz_offset, py_map):
     records = []
     while f.tell() != file_size:
         word_count = read_uint16(f)
-        pinyin_count = int(read_uint16(f) / 2)
+        py_idx_count = int(read_uint16(f) / 2)
 
         py_set = []
-        for i in range(pinyin_count):
-            py_id = read_uint16(f)
-            if (py_map.get(py_id, None) == None):
+        for i in range(py_idx_count):
+            py_idx = read_uint16(f)
+            if (py_map.get(py_idx, None) == None):
                 return records
-            py_set.append(py_map[py_id])
+            py_set.append(py_map[py_idx])
         py_str = " ".join(py_set)
 
         for i in range(word_count):
             word_len = read_uint16(f)
             word_str = read_utf16_str(f, -1, word_len)
+
+            # 跳过 ext_len 和 ext 共 12 个字节
             f.read(12)
             records.append((py_str, word_str))
     return records
