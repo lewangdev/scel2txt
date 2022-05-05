@@ -151,6 +151,9 @@ use_preset_vocabulary: true
         map(lambda x: "# * %s" % x.replace(".scel", ""), scel_files))
     dict_file_content.append(dict_file_header % "\n".join(sougo_dict_name_list))
 
+    if not os.path.exists("./out"):
+        os.mkdir("./out")
+    
     for scel_file in scel_files:
         records = get_words_from_sogou_cell_dict(
             os.path.join("./scel", scel_file))
