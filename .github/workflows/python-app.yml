@@ -29,7 +29,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Download sogou dict files
       run: |
-        wget -nv -O scel/1.scel https://pinyin.sogou.com/d/dict/download_cell.php?id=4&name=%E7%BD%91%E7%BB%9C%E6%B5%81%E8%A1%8C%E6%96%B0%E8%AF%8D%E3%80%90%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E3%80%91&f=detail
+        wget -nv -O scel/1.scel https://pinyin.sogou.com/dict/download_cell.php?id=20647&name=%E4%B8%AD%E5%9B%BD%E9%AB%98%E7%AD%89%E9%99%A2%E6%A0%A1%EF%BC%88%E5%A4%A7%E5%AD%A6%EF%BC%89%E5%A4%A7%E5%85%A8%E3%80%90%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E3%80%91
     - name: Merge scel to rime dict
       run: |
         python scel2txt.py
