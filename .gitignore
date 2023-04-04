@@ -2,3 +2,4 @@
 *.txt
 *.scel
 *.yaml
+.venv/
