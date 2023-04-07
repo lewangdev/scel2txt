@@ -1,15 +1,24 @@
 # scel2txt
 
-搜狗细胞词库转鼠须管（Rime）词库，使用 Python3 实现
+搜狗细胞词库转鼠须管（Rime）词库，提供 Python3 和 Golang 实现的版本
 
 ## 使用
 
 将从[搜狗官方词库网站](https://pinyin.sogou.com/dict/)下载的 `*.scel` 文件放入 `scel` 文件夹，然后运行
 
+### Python
+
 ```shell
 python3 scel2txt.py
 ```
 
+### 或者下载编译好的命令 [scel2txt-darwin-amd64-0.0.1.gz](https://github.com/lewangdev/scel2txt/releases/download/v0.0.1/scel2txt-darwin-amd64-0.0.1.gz)
+
+```shell
+gunzip scel2txt-darwin-amd64-0.0.1.gz
+chmod +x scel2txt-darwin-amd64-0.0.1
+./scel2txt-darwin-amd64-0.0.1
+```
 ## 生成的文件
 
 * 后缀为 .txt 的同名词库文件
