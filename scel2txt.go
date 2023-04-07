@@ -73,6 +73,7 @@ func getPyMap(b *bytes.Reader) map[uint16]string {
 	}
 	return pyMap
 }
+
 func getRecords(b *bytes.Reader, fileSize int64, hzOffset int64, pyMap map[uint16]string) []string {
 	b.Seek(int64(hzOffset), io.SeekStart)
 	var records []string
@@ -111,11 +112,8 @@ func getWordsFromSogouCellDict(fname string) []string {
 	}
 
 	b := bytes.NewReader(data)
-
 	hzOffset := getHzOffset(b)
-
 	pyMap := getPyMap(b)
-
 	fileSize := int64(len(data))
 	words := getRecords(b, fileSize, hzOffset, pyMap)
 
