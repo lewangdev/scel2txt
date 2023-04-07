@@ -3,3 +3,6 @@
 *.scel
 *.yaml
 .venv/
+out/
+scel/
+scel2txt
